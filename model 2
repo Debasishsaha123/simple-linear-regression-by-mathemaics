@@ -1,0 +1,59 @@
+#@DEBASISH SAHA
+
+x=np.array([14.2,16.4,11.9,15.2,18.5,22.1,19.4,25.1,23.4,18.1,22.6,17.2])
+
+y=np.array([215,325,185,332,406,522,412,614,544,421,445,408])
+
+n=np.size(x)
+
+m_x,m_y=np.mean(x),np.mean(y)
+
+ss_xy=np.sum(y*x)-n* m_x *m_y
+
+ss_xx=np.sum(x*x)-n* m_x *m_x
+
+b0_1=ss_xy/ss_xx #slope
+
+b0_0=m_y-b0_1*m_x #intercept
+
+y_pred=b0_0+b0_1*x
+
+print('Intercept: ',b0_0)
+
+print('Slope: ',b0_1)
+
+import math 
+
+sigma_x=math.sqrt(n*np.sum(x*x)-np.sum(x)*np.sum(x))
+
+sigma_y=math.sqrt(n*np.sum(y*y)-np.sum(y)*np.sum(y))
+
+print(sigma_x)
+
+print(sigma_y)
+
+cov_xy=(n*np.sum(x*y))-np.sum(x)*np.sum(y)
+
+print('covariance: ',cov)
+
+cor_coeff=cov_xy/(sigma_x*sigma_y)
+
+print('Correlation coefficient: ',cor_coeff)
+
+sse=sum((y-y_pred)*(y-y_pred))
+
+sst=sum((y-m_y)*(y-m_y))
+
+r2_cal=1-(sse/sst)
+
+print(r2_cal)
+
+plt.scatter(x,y)
+
+plt.plot(x,y_pred,color='k',marker='o')
+
+print(r2_score(y,y_pred))
+
+r2=r2_score(y,y_pred)
+r=r2**0.5
+print(r)
